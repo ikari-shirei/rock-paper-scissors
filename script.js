@@ -42,41 +42,55 @@ function play(playerSelection, computerSelection = computerPlay()) {
 }
 
 function game() {
-  //count win, lose and tie
+  //save win, lose and tie
   let win = 0;
   let lose = 0;
   let tie = 0;
   //save results into an array
   let results = [];
-  //iterator is in function scope for later use
+  //iterator is in function scope in case of later use
   let i = undefined;
-  console.log(results);
-  //take 5 inputs, compare them with using play function and save into results array
-  for (i = 1; i <= 5; i++) {
-    results.push(
-      play(prompt(`Rock, paper or scissor? (Default choice is rock.)`))
-    );
-  }
-
-  //iterate input data, count win, lose and tie
-  for (let j = 0; j < results.length; j++) {
-    if (results[j].includes('You win.')) {
-      win++;
-    } else if (results[j].includes('You lose.')) {
-      lose++;
-    } else {
-      tie++;
+  //save answer after find it and return it at the end
+  let answer = undefined;
+  //take 5 inputs and save into results array
+  function askForInput(num) {
+    for (i = 1; i <= num; i++) {
+      results.push(
+        play(prompt(`Rock, paper or scissor? (Default choice is rock.)`))
+      );
     }
   }
 
-  //compare win and loses, find if user won or lost
-  if (win > lose) {
-    return `You win ${win} times, lose ${lose} times and tie ${tie} times. You won, computer lost.`;
-  } else if (lose > win) {
-    return `You win ${win} times, lose ${lose} times and tie ${tie} times. You lost, computer won.`;
-  } else {
-    return `You win ${win} times, lose ${lose} times and tie ${tie} times. Nobody won. It's tie.`;
+  askForInput(5);
+
+  //compare win and loses
+  function compareWinLose() {
+    //loop in results
+    for (let j = 0; j < results.length; j++) {
+      //count win and loses
+      if (results[j].includes('You win.')) {
+        win++;
+      } else if (results[j].includes('You lose.')) {
+        lose++;
+      }
+      // if win or lose reach 5, return answer, else ask for input one more time
+      if (win === 5) {
+        answer = `You win ${win} times, lose ${lose} times and tie ${tie} times. You won, computer lost.`;
+        break;
+      } else if (lose === 5) {
+        answer = `You win ${win} times, lose ${lose} times and tie ${tie} times. You lost, computer won.`;
+        break;
+      } else {
+        tie++;
+        //if it is tie, use askForInput with parameter 1 to loop one more time.
+        askForInput(1);
+      }
+    }
   }
+
+  compareWinLose();
+
+  return answer;
 }
 
 console.log(game());
