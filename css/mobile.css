@@ -1,0 +1,20 @@
+@media screen and (max-width: 359px) {
+  .black-box1,
+  .black-box2 {
+    margin-bottom: 0;
+    width: 130px;
+  }
+  .buttons {
+    max-width: 200px;
+
+  }
+
+  .buttons button {
+    height: 3rem;
+    margin-bottom: 0.2rem;
+  }
+
+  footer {
+    display: none;
+  }
+}

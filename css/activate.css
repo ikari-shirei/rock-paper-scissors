@@ -1,0 +1,15 @@
+.buttons button:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.end-game button:hover {
+  background-color: var(--black);
+  color: var(--yellow);
+  cursor: pointer;
+}
+
+footer a i:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
